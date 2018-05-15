@@ -2,8 +2,11 @@ import Vue from 'vue'
 import App from './App.vue'
 import store from './store/index.js'
 import router from './router/index.js'
+import shortkey from 'vue-shortkey'
 
 Vue.config.productionTip = false
+
+Vue.use(shortkey)
 
 new Vue({
   store,

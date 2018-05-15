@@ -40,7 +40,7 @@ export default {
       <div v-show="opened">
         <form v-on:submit.prevent="add()">
           <div class="card">
-            <textarea v-model="title" v-on:keydown.enter.prevent="add()"></textarea>
+            <textarea v-model="title" v-on:keydown.enter.prevent="add()" v-on:keydown.escape.prevent="close()"></textarea>
           </div>
           <button type="button" v-on:click="close()">Cancel</button>
           <button type="submit">Add</button>
