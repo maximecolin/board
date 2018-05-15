@@ -21,7 +21,10 @@ const getters = {
 const actions = {
   updateCardTitle({ getters, commit }, { uuid, title }) {
     commit('updateCardTitle', { card: getters.findCardByUuid(uuid), title })
-  }
+  },
+  updateCardColor({ getters, commit }, { uuid, color }) {
+    commit('updateCardColor', { card: getters.findCardByUuid(uuid), color })
+  },
 }
 
 const mutations = {
@@ -40,7 +43,7 @@ const mutations = {
     state.columns = columns
   },
   addCard(state, { column, title }) {
-    const card = { uuid: uuid(), title };
+    const card = { uuid: uuid(), title, color: 'none' };
     state.columns.find(element => element.uuid === column.uuid).cards.push(card)
   },
   updateCards(state, { column, cards }) {
@@ -48,6 +51,9 @@ const mutations = {
   },
   updateCardTitle(state, { card, title }) {
     card.title = title;
+  },
+  updateCardColor(state, { card, color }) {
+    card.color = color;
   }
 }
 

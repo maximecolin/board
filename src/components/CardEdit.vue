@@ -1,9 +1,11 @@
 <script>
 import CardEditTitle from './CardEditTitle.vue'
+import CardEditColor from './CardEditColor.vue'
 
 export default {
   components: {
-    CardEditTitle
+    CardEditTitle,
+    CardEditColor
   },
   computed: {
     card() {
@@ -20,9 +22,10 @@ export default {
 
 <template>
   <div class="overlay" v-on:click="close()">
-    <div class="modal" v-on:click.prevent.stop>
+    <div class="modal" v-on:click.stop>
       <button v-shortkey.once="['esc']" v-on:shortkey="close()" v-on:click="close()" class="close">&times;</button>
       <CardEditTitle :card="card"></CardEditTitle>
+      <CardEditColor :card="card"></CardEditColor>
     </div>
   </div>
 </template>
