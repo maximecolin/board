@@ -2,14 +2,14 @@
 export default {
   props: {
     card: Object,
-    filter: String
+    search: String
   },
   computed: {
     className() {
       return 'color-' + this.card.color;
     },
     filtered() {
-      return this.filter ? undefined === this.card.labels.find(label => label.name === this.filter) : false
+      return this.search ? undefined === this.card.labels.find(label => label.name === this.search) : false
     }
   }
 }

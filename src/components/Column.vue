@@ -11,7 +11,7 @@ export default {
   },
   props: {
     column: Object,
-    filter: String
+    search: String
   },
   computed: {
     cards: {
@@ -43,7 +43,7 @@ export default {
     </div>
 
     <Draggable v-model="cards" :options="{ draggable: '.card-draggable', filter: '.card-not-draggable', group: 'cards' }" class="cards">
-      <Card v-for="(card, key) in cards" :key="key" :card="card" :filter="filter" class="card-draggable"></Card>
+      <Card v-for="(card, key) in cards" :key="key" :card="card" :search="search" class="card-draggable"></Card>
     </Draggable>
 
     <CardAdd :column="column"></CardAdd>

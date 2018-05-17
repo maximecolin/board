@@ -4,7 +4,7 @@ export default {
     value: String
   },
   computed: {
-    filter: {
+    search: {
       get() {
         return this.value
       },
@@ -12,27 +12,27 @@ export default {
         return this.$emit('input', value)
       }
     },
-    hasFilter() {
-      return this.filter && this.filter.length > 0
+    hasSearch() {
+      return this.search && this.search.length > 0
     }
   },
   methods: {
     clear() {
-      this.filter = null
+      this.search = null
     }
   }
 }
 </script>
 
 <template>
-  <form v-on:submit.prevent class="filter-form">
-    <button type="button" class="filter-clear" v-show="hasFilter" v-on:click="clear()">&times;</button>
-    <input type="text" v-model="filter" placeholder="Filter...">
+  <form v-on:submit.prevent class="search-form">
+    <button type="button" class="search-clear" v-show="hasSearch" v-on:click="clear()">&times;</button>
+    <input type="text" v-model="search" placeholder="Search...">
   </form>
 </template>
 
 <style lang="scss">
-  .filter-form {
+  .search-form {
 
     background-color: #36393c;
     padding: 10px;
@@ -53,7 +53,7 @@ export default {
       width: calc(100% - 50px);
     }
 
-    .filter-clear {
+    .search-clear {
       display: inline-block;
       width: 24px;
       height: 24px;

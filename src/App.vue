@@ -2,7 +2,7 @@
 import Draggable from 'vuedraggable'
 import Column from './components/Column.vue'
 import ColumnAdd from './components/ColumnAdd.vue'
-import FilterForm from './components/FilterForm.vue'
+import SearchForm from './components/SearchForm.vue'
 
 export default {
   name: 'app',
@@ -10,11 +10,11 @@ export default {
     Column,
     ColumnAdd,
     Draggable,
-    FilterForm
+    SearchForm
   },
   data() {
     return {
-      filter: null
+      search: null
     }
   },
   computed: {
@@ -32,9 +32,9 @@ export default {
 
 <template>
   <div id="app">
-    <FilterForm v-model="filter"></FilterForm>
+    <SearchForm v-model="search"></SearchForm>
     <Draggable v-model="columns" :options="{ draggable: '.column-draggable', filter: '.column-not-draggable' }" class="columns">
-      <Column v-for="(column, key) in columns" :key="key" :column="column" :filter="filter" class="column-draggable"></Column>
+      <Column v-for="(column, key) in columns" :key="key" :column="column" :search="search" class="column-draggable"></Column>
       <ColumnAdd slot="footer" class="column"></ColumnAdd>
     </Draggable>
     <router-view></router-view>
