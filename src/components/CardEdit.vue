@@ -1,11 +1,13 @@
 <script>
 import CardEditTitle from './CardEditTitle.vue'
 import CardEditColor from './CardEditColor.vue'
+import CardEditLabel from './CardEditLabel.vue'
 
 export default {
   components: {
     CardEditTitle,
-    CardEditColor
+    CardEditColor,
+    CardEditLabel
   },
   computed: {
     card() {
@@ -26,6 +28,7 @@ export default {
       <button v-shortkey.once="['esc']" v-on:shortkey="close()" v-on:click="close()" class="close">&times;</button>
       <CardEditTitle :card="card"></CardEditTitle>
       <CardEditColor :card="card"></CardEditColor>
+      <CardEditLabel :card="card"></CardEditLabel>
     </div>
   </div>
 </template>

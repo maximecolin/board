@@ -2,13 +2,20 @@
 import Draggable from 'vuedraggable'
 import Column from './components/Column.vue'
 import ColumnAdd from './components/ColumnAdd.vue'
+import FilterForm from './components/FilterForm.vue'
 
 export default {
   name: 'app',
   components: {
     Column,
     ColumnAdd,
-    Draggable
+    Draggable,
+    FilterForm
+  },
+  data() {
+    return {
+      filter: null
+    }
   },
   computed: {
     columns: {
@@ -25,8 +32,9 @@ export default {
 
 <template>
   <div id="app">
+    <FilterForm v-model="filter"></FilterForm>
     <Draggable v-model="columns" :options="{ draggable: '.column-draggable', filter: '.column-not-draggable' }" class="columns">
-      <Column v-for="(column, key) in columns" :key="key" :column="column" class="column column-draggable"></Column>
+      <Column v-for="(column, key) in columns" :key="key" :column="column" :filter="filter" class="column-draggable"></Column>
       <ColumnAdd slot="footer" class="column"></ColumnAdd>
     </Draggable>
     <router-view></router-view>

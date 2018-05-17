@@ -10,7 +10,8 @@ export default {
     CardAdd
   },
   props: {
-    column: Object
+    column: Object,
+    filter: String
   },
   computed: {
     cards: {
@@ -31,7 +32,7 @@ export default {
 </script>
 
 <template>
-  <div>
+  <div class="column">
     <h4 class="title">
       {{ column.title }}
       <button type="button" class="column-not-draggable" v-on:click="remove()">&times;</button>
@@ -42,12 +43,12 @@ export default {
     </div>
 
     <Draggable v-model="cards" :options="{ draggable: '.card-draggable', filter: '.card-not-draggable', group: 'cards' }" class="cards">
-      <Card v-for="(card, key) in cards" :key="key" :card="card" class="card card-draggable"></Card>
+      <Card v-for="(card, key) in cards" :key="key" :card="card" :filter="filter" class="card-draggable"></Card>
     </Draggable>
 
     <CardAdd :column="column"></CardAdd>
   </div>
 </template>
 
-<style>
+<style lang="scss">
 </style>
