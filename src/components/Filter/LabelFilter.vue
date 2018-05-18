@@ -59,6 +59,7 @@ export default {
       color: #ccc;
       padding: 5px 10px;
       font-size: 18px;
+      cursor: pointer;
     }
 
     .label-filter-dropdown {
@@ -70,6 +71,7 @@ export default {
       label {
         display: block;
         margin: 3px 0;
+        cursor: pointer;
       }
     }
   }

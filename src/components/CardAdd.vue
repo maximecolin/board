@@ -35,8 +35,8 @@ export default {
 </script>
 
 <template>
-  <div>
-      <div v-show="!opened" v-on:click="open()">Add a card...</div>
+  <div class="card-add">
+      <button class="card-add-button" v-show="!opened" v-on:click="open()">Add a card...</button>
       <div v-show="opened">
         <form v-on:submit.prevent="add()">
           <div class="card">
@@ -49,5 +49,14 @@ export default {
   </div>
 </template>
 
-<style>
+<style lang="scss">
+  .card-add {
+    .card-add-button {
+      border: none;
+      background: none;
+      color: #cccccc;
+      font-size: 14px;
+      cursor: pointer;
+    }
+  }
 </style>

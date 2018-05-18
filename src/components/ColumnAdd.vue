@@ -32,8 +32,8 @@ export default {
 </script>
 
 <template>
-  <div>
-    <div v-show="!opened" v-on:click="open()">Add a column...</div>
+  <div class="column-add">
+    <button class="column-add-button" v-show="!opened" v-on:click="open()">Add a column...</button>
     <div v-show="opened">
       <form v-on:submit.prevent="add()">
         <input type="text" v-model="title" v-on:keydown.escape.prevent.stop="close()">
@@ -44,5 +44,14 @@ export default {
   </div>
 </template>
 
-<style>
+<style lang="scss">
+  .column-add {
+    .column-add-button {
+      border: none;
+      background: none;
+      color: #cccccc;
+      font-size: 14px;
+      cursor: pointer;
+    }
+  }
 </style>
