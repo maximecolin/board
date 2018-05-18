@@ -19,6 +19,16 @@ const getters = {
   },
   findLabelByUuid: (state) => (uuid) => {
     return state.labels.find(label => label.uuid === uuid)
+  },
+  searchLabels: (state) => (search) => {
+    return search === null || search === ''
+      ? state.labels
+      : state.labels.filter(label => label.name.match(new RegExp('.*' + search + '.*', 'i')))
+  },
+  searchCards: (state, getters) => (search) => {
+    return search === null || search === ''
+      ? []
+      : getters.allCards.filter(card => card.title.match(new RegExp('.*' + search + '.*', 'i')))
   }
 }
 

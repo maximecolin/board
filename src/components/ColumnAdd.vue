@@ -36,7 +36,7 @@ export default {
     <div v-show="!opened" v-on:click="open()">Add a column...</div>
     <div v-show="opened">
       <form v-on:submit.prevent="add()">
-        <input type="text" v-model="title" />
+        <input type="text" v-model="title" v-on:keydown.escape.prevent.stop="close()">
         <button type="button" v-on:click="close()">Cancel</button>
         <button type="submit">Add</button>
       </form>

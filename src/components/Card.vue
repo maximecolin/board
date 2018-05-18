@@ -1,15 +1,30 @@
 <script>
+import InlineLabels from './InlineLabels.vue'
+
 export default {
+  components: {
+    InlineLabels
+  },
   props: {
     card: Object,
-    search: String
+    filters: Object
   },
   computed: {
     className() {
       return 'color-' + this.card.color;
     },
     filtered() {
-      return this.search ? undefined === this.card.labels.find(label => label.name === this.search) : false
+      if (!this.filters) {
+        return false
+      }
+
+      return this.intersect.length !== this.filters.labels.length
+    },
+    intersect() {
+      const labelsUuids = this.card.labels.map(label => label.uuid)
+      const searchUuids = this.filters.labels.map(label => label.uuid)
+
+      return labelsUuids.filter(uuid => searchUuids.indexOf(uuid) > -1)
     }
   }
 }
@@ -17,9 +32,7 @@ export default {
 
 <template>
   <router-link :to="{ name: 'card', params: { uuid: card.uuid } }" v-bind:class="[className, 'card', filtered ? 'filtered' : '']">
-    <span class="card-labels">
-      <span v-for="(label, index) in card.labels" :key="index" class="card-label">{{ label.name }}</span>
-    </span>
+    <InlineLabels :labels="card.labels"></InlineLabels>
     <span class="card-title">{{ card.title }}</span>
   </router-link>
 </template>
@@ -37,22 +50,37 @@ export default {
       opacity: 0.3;
     }
 
+    &.sortable-choosen {
+      transform: rotate(10deg);
+    }
+
     .card-title {
       display: block;
     }
 
-    .card-labels {
-      display: block;
-      margin: 0 -3px;
+    display: block;
+    background-color: #36393c;
+    padding: 20px;
+    margin: 10px 0;
+    color: #cccccc;
+    border-radius: 3px;
+    text-decoration: none;
 
-      .card-label {
-        display: inline-block;
-        margin: 3px;
-        background-color: #222;
-        padding: 1px 3px;
-        font-size: 12px;
-        border-radius: 3px;
-      }
+    .title {
+      font-size: 14px;
+    }
+
+    textarea {
+      background-color: transparent;
+      color: #cccccc;
+      word-wrap: break-word;
+      resize: none;
+      border: none;
+      width: calc(100% - 40px);
+      font-size: 14px;
+      margin: 0;
+      padding: 0;
+      height: 14px;
     }
 
   }
