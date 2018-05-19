@@ -10,6 +10,9 @@ export default {
     filters: Object
   },
   computed: {
+    labels() {
+      return this.card.labels.map(uuid => this.$store.getters.findLabelByUuid(uuid));
+    },
     className() {
       return 'color-' + this.card.color;
     },
@@ -21,10 +24,7 @@ export default {
       return this.intersect.length !== this.filters.labels.length
     },
     intersect() {
-      const labelsUuids = this.card.labels.map(label => label.uuid)
-      const searchUuids = this.filters.labels.map(label => label.uuid)
-
-      return labelsUuids.filter(uuid => searchUuids.indexOf(uuid) > -1)
+      return this.card.labels.filter(uuid => this.filters.labels.indexOf(uuid) > -1)
     }
   }
 }
@@ -32,7 +32,7 @@ export default {
 
 <template>
   <router-link :to="{ name: 'card', params: { uuid: card.uuid } }" v-bind:class="[className, 'card', filtered ? 'filtered' : '']">
-    <InlineLabels :labels="card.labels"></InlineLabels>
+    <InlineLabels :labels="labels"></InlineLabels>
     <span class="card-title">{{ card.title }}</span>
   </router-link>
 </template>

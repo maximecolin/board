@@ -39,7 +39,7 @@ export default {
     <ul>
       <li v-for="(label, key) in labels" :key="key">
         <label>
-          <input type="checkbox" name="labels" v-model="checked" v-bind:value="label" />
+          <input type="checkbox" name="labels" v-model="checked" v-bind:value="label.uuid" />
           <span>{{ label.name }}</span>
         </label>
         <button type="button" v-on:click="$emit('edit', { label })">edit</button>
