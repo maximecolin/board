@@ -1,47 +1,17 @@
 <script>
-import Draggable from 'vuedraggable'
-import Column from './components/Column.vue'
-import ColumnAdd from './components/ColumnAdd.vue'
-import SearchForm from './components/SearchForm.vue'
-import FilterForm from './components/Filter/FilterForm.vue'
+import Board from './components/Board/Board.vue'
 
 export default {
   name: 'app',
   components: {
-    Column,
-    ColumnAdd,
-    Draggable,
-    SearchForm,
-    FilterForm
-  },
-  data() {
-    return {
-      filters: {
-        labels: []
-      }
-    }
-  },
-  computed: {
-    columns: {
-      get() {
-        return this.$store.state.columns
-      },
-      set(value) {
-        this.$store.commit('updateColumns', value)
-      }
-    }
+    Board
   }
 }
 </script>
 
 <template>
   <div id="app">
-    <SearchForm></SearchForm>
-    <FilterForm v-model="filters"></FilterForm>
-    <Draggable v-model="columns" :options="{ draggable: '.column-draggable', filter: '.column-not-draggable' }" class="columns">
-      <Column v-for="(column, key) in columns" :key="key" :column="column" :filters="filters" class="column-draggable"></Column>
-      <ColumnAdd slot="footer" class="column"></ColumnAdd>
-    </Draggable>
+    <Board></Board
     <transition name="fade">
       <router-view></router-view>
     </transition>

@@ -1,7 +1,7 @@
 <script>
 import Draggable from 'vuedraggable'
-import Card from './Card.vue'
-import CardAdd from './CardAdd.vue'
+import Card from '../Card/Card.vue'
+import CardAdd from '../Card/CardAdd.vue'
 
 export default {
   components: {

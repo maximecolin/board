@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import CardEdit from '../components/CardEdit.vue'
+import CardEdit from '../components/Card/CardEdit.vue'
 
 Vue.use(VueRouter)
 

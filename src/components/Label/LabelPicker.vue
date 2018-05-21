@@ -1,7 +1,7 @@
 <script>
-import LableCreate from './LabelPicker/LabelCreate.vue'
-import LableEdit from './LabelPicker/LabelEdit.vue'
-import LableList from './LabelPicker/LabelList.vue'
+import LableCreate from './LabelCreate.vue'
+import LableEdit from './LabelEdit.vue'
+import LableList from './LabelList.vue'
 
 export default {
   components: {

@@ -1,5 +1,5 @@
 <script>
-import InlineLabels from './InlineLabels.vue'
+import InlineLabels from '../Label/InlineLabels.vue'
 
 export default {
   components: {

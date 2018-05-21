@@ -1,5 +1,5 @@
 <script>
-import LabelPicker from './LabelPicker.vue'
+import LabelPicker from '../Label/LabelPicker.vue'
 
 export default {
   components: {

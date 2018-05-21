@@ -6,6 +6,7 @@ import uuid from 'uuid/v4'
 Vue.use(Vuex)
 
 const state = {
+  boards: [],
   columns: [],
   labels: []
 }
@@ -29,10 +30,19 @@ const getters = {
     return search === null || search === ''
       ? []
       : getters.allCards.filter(card => card.title.match(new RegExp('.*' + search + '.*', 'i')))
+  },
+  searchBoards: (state) => (search) => {
+    return search === null || search === ''
+      ? []
+      : state.boards.filter(board => board.title.match(new RegExp('.*' + search + '.*', 'i')))
   }
 }
 
 const actions = {
+  addBoard({ commit }, { title }) {
+    const board = { uuid: uuid(), title, columns: [], labels: [] }
+    commit('addBoard', { board })
+  },
   updateCardTitle({ getters, commit }, { uuid, title }) {
     commit('updateCardTitle', { card: getters.findCardByUuid(uuid), title })
   },
@@ -48,6 +58,9 @@ const actions = {
 }
 
 const mutations = {
+  addBoard(state, { board }) {
+    state.board.push(board)
+  },
   addColumn(state, { title }) {
     const column = { uuid: uuid(), title, cards: [] }
     state.columns.push(column)
