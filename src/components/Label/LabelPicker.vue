@@ -10,6 +10,7 @@ export default {
     LableList
   },
   props: {
+    board: Object,
     value: Array
   },
   data() {
@@ -47,9 +48,9 @@ export default {
 
 <template>
   <div class="label-picker">
-    <LableCreate v-show="action === 'create'" v-on:created="showList()" v-on:canceled="showList()"></LableCreate>
-    <LableEdit v-show="action === 'edit'" :label="label" v-on:edited="showList()" v-on:canceled="showList()"></LableEdit>
-    <LableList v-show="action === 'list'" v-model="checked" v-on:create="showCreate()" v-on:edit="showEdit($event.label)"></LableList>
+    <LableCreate :board="board" v-show="action === 'create'" v-on:created="showList()" v-on:canceled="showList()"></LableCreate>
+    <LableEdit :board="board" v-show="action === 'edit'" :label="label" v-on:edited="showList()" v-on:canceled="showList()"></LableEdit>
+    <LableList :board="board" v-show="action === 'list'" v-model="checked" v-on:create="showCreate()" v-on:edit="showEdit($event.label)"></LableList>
   </div>
 </template>
 

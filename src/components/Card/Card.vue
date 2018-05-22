@@ -6,12 +6,13 @@ export default {
     InlineLabels
   },
   props: {
+    board: Object,
     card: Object,
     filters: Object
   },
   computed: {
     labels() {
-      return this.card.labels.map(uuid => this.$store.getters.findLabelByUuid(uuid));
+      return this.card.labels.map(labelUuid => this.$store.getters.findLabelByUuid(this.board.uuid, labelUuid));
     },
     className() {
       return 'color-' + this.card.color;
@@ -31,7 +32,7 @@ export default {
 </script>
 
 <template>
-  <router-link :to="{ name: 'card', params: { uuid: card.uuid } }" v-bind:class="[className, 'card', filtered ? 'filtered' : '']">
+  <router-link :to="{ name: 'card', params: { boardUuid: board.uuid, cardUuid: card.uuid } }" v-bind:class="[className, 'card', filtered ? 'filtered' : '']">
     <InlineLabels :labels="labels"></InlineLabels>
     <span class="card-title">{{ card.title }}</span>
   </router-link>

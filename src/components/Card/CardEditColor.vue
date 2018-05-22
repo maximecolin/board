@@ -1,6 +1,7 @@
 <script>
 export default {
   props: {
+    board: Object,
     card: Object
   },
   data() {
@@ -11,7 +12,7 @@ export default {
   },
   watch: {
     color() {
-      this.$store.dispatch('updateCardColor', { uuid: this.card.uuid, color: this.color });
+      this.$store.dispatch('updateCardColor', { boardUuid: this.board.uuid, cardUuid: this.card.uuid, color: this.color });
     }
   }
 }

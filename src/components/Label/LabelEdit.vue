@@ -1,6 +1,7 @@
 <script>
 export default {
   props: {
+    board: Object,
     label: Object
   },
   data() {
@@ -10,7 +11,7 @@ export default {
   },
   methods: {
     save() {
-      this.$store.dispatch('updateLabel', { uuid: this.label.uuid, name: this.name })
+      this.$store.dispatch('updateBoardLabel', { boardUuid: this.board.uuid, labelUuid: this.label.uuid, name: this.name })
       this.$emit('edited')
     },
     cancel() {

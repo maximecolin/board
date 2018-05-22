@@ -1,5 +1,8 @@
 <script>
 export default {
+  props: {
+    board: Object
+  },
   data() {
     return {
       opened: false,
@@ -8,7 +11,7 @@ export default {
   },
   methods: {
     add() {
-      this.$store.commit('addColumn', { title: this.title })
+      this.$store.dispatch('addBoardColumn', { boardUuid: this.board.uuid, title: this.title })
       this.close()
     },
     open() {

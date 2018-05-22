@@ -10,6 +10,7 @@ export default {
     CardAdd
   },
   props: {
+    board: Object,
     column: Object,
     filters: Object
   },
@@ -18,14 +19,14 @@ export default {
       get() {
         return this.column.cards
       },
-      set(value) {
-        this.$store.commit('updateCards', { column: this.column, cards: value })
+      set(cards) {
+        this.$store.dispatch('updateColumnCards', { boardUuid: this.board.uuid, columnUuid: this.column.uuid, cards })
       }
     }
   },
   methods: {
     remove() {
-      this.$store.commit('removeColumn', { column: this.column })
+      this.$store.dispatch('removeBoardColumn', { boardUuid: this.board.uuid, column: this.column })
     }
   }
 }
@@ -43,10 +44,10 @@ export default {
     </div>
 
     <Draggable v-model="cards" :options="{ draggable: '.card-draggable', filter: '.card-not-draggable', group: 'cards' }" class="cards">
-      <Card v-for="(card, key) in cards" :key="key" :card="card" :filters="filters" class="card-draggable"></Card>
+      <Card v-for="(card, key) in cards" :key="key" :board="board" :card="card" :filters="filters" class="card-draggable"></Card>
     </Draggable>
 
-    <CardAdd :column="column"></CardAdd>
+    <CardAdd :board="board" :column="column"></CardAdd>
   </div>
 </template>
 

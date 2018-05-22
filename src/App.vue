@@ -1,19 +1,20 @@
 <script>
-import Board from './components/Board/Board.vue'
+import Navbar from './components/Navbar.vue'
 
 export default {
   name: 'app',
   components: {
-    Board
+    Navbar
   }
 }
 </script>
 
 <template>
   <div id="app">
-    <Board></Board
+    <Navbar></Navbar>
+    <router-view></router-view>
     <transition name="fade">
-      <router-view></router-view>
+      <router-view name="popin"></router-view>
     </transition>
   </div>
 </template>
@@ -24,6 +25,7 @@ body {
   background-color: #1d2021;
   color: #999999;
   margin: 0;
+  padding: 0;
 }
 
 h4, h5 {
@@ -34,7 +36,6 @@ h4, h5 {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  margin: 10px;
   font-size: 14px;
 }
 

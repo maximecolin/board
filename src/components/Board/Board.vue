@@ -21,12 +21,15 @@ export default {
     }
   },
   computed: {
+    board() {
+      return this.$store.getters.findBoardByUuid(this.$route.params.boardUuid)
+    },
     columns: {
       get() {
-        return this.$store.state.columns
+        return this.board.columns
       },
-      set(value) {
-        this.$store.commit('updateColumns', value)
+      set(columns) {
+        this.$store.dispatch('updateBoardColumns', { boardUuid: this.board.uuid, columns })
       }
     }
   }
@@ -35,11 +38,11 @@ export default {
 
 <template>
   <div>
-    <SearchForm></SearchForm>
-    <FilterForm v-model="filters"></FilterForm>
+    <SearchForm :board="board"></SearchForm>
+    <FilterForm :board="board" v-model="filters"></FilterForm>
     <Draggable v-model="columns" :options="{ draggable: '.column-draggable', filter: '.column-not-draggable' }" class="columns">
-      <Column v-for="(column, key) in columns" :key="key" :column="column" :filters="filters" class="column-draggable"></Column>
-      <ColumnAdd slot="footer" class="column"></ColumnAdd>
+      <Column v-for="(column, key) in columns" :key="key" :board="board" :column="column" :filters="filters" class="column-draggable"></Column>
+      <ColumnAdd slot="footer" class="column" :board="board"></ColumnAdd>
     </Draggable>
   </div>
 </template>

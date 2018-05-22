@@ -1,6 +1,7 @@
 <script>
 export default {
   props: {
+    board: Object,
     card: Object
   },
   data() {
@@ -20,7 +21,7 @@ export default {
     },
     submit() {
       this.editing = false
-      this.$store.dispatch('updateCardTitle', { uuid: this.card.uuid, title: this.title })
+      this.$store.dispatch('updateCardTitle', { boardUuid: this.board.uuid, cardUuid: this.card.uuid, title: this.title })
     }
   },
   watch: {

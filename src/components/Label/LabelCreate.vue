@@ -1,5 +1,8 @@
 <script>
 export default {
+  props: {
+    board: Object,
+  },
   data() {
     return {
       name: null
@@ -14,7 +17,7 @@ export default {
       this.$emit('canceled')
     },
     add() {
-      this.$store.commit('addLabel', { name: this.name })
+      this.$store.dispatch('addBoardLabel', { boardUuid: this.board.uuid, name: this.name })
       this.reset()
       this.$emit('created')
     }

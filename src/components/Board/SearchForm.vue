@@ -5,6 +5,9 @@ export default {
   components: {
     Card
   },
+  props: {
+    board: Object
+  },
   data() {
     return {
       input: null
@@ -12,7 +15,7 @@ export default {
   },
   computed: {
     cards() {
-      return this.$store.getters.searchCards(this.input)
+      return this.$store.getters.searchCards(this.board.uuid, this.input)
     }
   },
   methods: {
@@ -28,7 +31,7 @@ export default {
     <input type="text" v-model="input" class="search-input" placeholder="Search..." v-on:keydown.escape.prevent.stop="clear()">
     <ul v-show="cards.length > 0" class="search-results">
       <li v-for="card in cards">
-        <Card :card="card"></Card>
+        <Card :board="board" :card="card"></Card>
       </li>
     </ul>
   </form>

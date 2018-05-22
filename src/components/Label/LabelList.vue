@@ -1,6 +1,7 @@
 <script>
 export default {
   props: {
+    board: Object,
     value: Array
   },
   data() {
@@ -10,9 +11,7 @@ export default {
   },
   computed: {
     labels() {
-      return this.search
-        ? this.$store.state.labels.filter(label => label.name.match(new RegExp('.*' + this.search + '.*', 'i')))
-        : this.$store.state.labels
+      return this.$store.getters.searchLabels(this.board.uuid, this.search)
     },
     checked: {
       get() {

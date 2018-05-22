@@ -10,13 +10,16 @@ export default {
     CardEditLabel
   },
   computed: {
+    board() {
+      return this.$store.getters.findBoardByUuid(this.$route.params.boardUuid)
+    },
     card() {
-      return this.$store.getters.findCardByUuid(this.$route.params.uuid)
+      return this.$store.getters.findCardByUuid(this.$route.params.boardUuid, this.$route.params.cardUuid)
     }
   },
   methods: {
     close() {
-      this.$router.push('/')
+      this.$router.push({ 'name': 'board', params: { boardUuid: this.$route.params.boardUuid } })
     }
   }
 }
@@ -26,9 +29,9 @@ export default {
   <div class="overlay" v-on:click="close()">
     <div class="modal" v-on:click.stop>
       <button v-shortkey.once="['esc']" v-on:shortkey="close()" v-on:click="close()" class="close">&times;</button>
-      <CardEditTitle :card="card"></CardEditTitle>
-      <CardEditColor :card="card"></CardEditColor>
-      <CardEditLabel :card="card"></CardEditLabel>
+      <CardEditTitle :board="board" :card="card"></CardEditTitle>
+      <CardEditColor :board="board" :card="card"></CardEditColor>
+      <CardEditLabel :board="board" :card="card"></CardEditLabel>
     </div>
   </div>
 </template>

@@ -6,6 +6,7 @@ export default {
     LabelPicker
   },
   props: {
+    board: Object,
     card: Object
   },
   data() {
@@ -18,7 +19,7 @@ export default {
       this.labels = this.card ? this.card.labels : []
     },
     labels() {
-      this.$store.dispatch('updateCardLabels', { uuid: this.card.uuid, labels: this.labels })
+      this.$store.dispatch('updateCardLabels', { boardUuid: this.board.uuid, cardUuid: this.card.uuid, labels: this.labels })
     }
   }
 }
@@ -26,6 +27,6 @@ export default {
 
 <template>
   <div>
-    <LabelPicker v-model="labels"></LabelPicker>
+    <LabelPicker :board="board" v-model="labels"></LabelPicker>
   </div>
 </template>

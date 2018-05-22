@@ -1,6 +1,7 @@
 <script>
 export default {
   props: {
+    board: Object,
     value: Array
   },
   data() {
@@ -11,7 +12,7 @@ export default {
   },
   computed: {
     labels() {
-      return this.$store.getters.searchLabels(this.search)
+      return this.$store.getters.searchLabels(this.board.uuid, this.search)
     },
     checked: {
       get() {

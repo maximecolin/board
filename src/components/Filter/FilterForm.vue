@@ -6,6 +6,7 @@ export default {
     LabelFilter
   },
   props: {
+    board: Object,
     value: Object
   },
   computed: {
@@ -23,7 +24,7 @@ export default {
 
 <template>
   <form v-on:submit.prevent class="filter-form">
-    <LabelFilter v-model="filters.labels"></LabelFilter>
+     <LabelFilter :board="board" v-model="filters.labels"></LabelFilter>
   </form>
 </template>
 

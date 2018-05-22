@@ -2,16 +2,36 @@
 export default {
   data() {
     return {
+      opened: false,
       search: null
     }
   },
   computed: {
     boards() {
-      if (this.search === null || this.search === '') {
-        return this.$store.state.boards;
-      }
-
-      return this.$store.getters.searchBoards(this.search);
+      return this.hasSearch
+        ? this.$store.getters.searchBoards(this.search)
+        : this.$store.state.boards
+    },
+    hasSearch() {
+      return this.search !== null && this.search !== ''
+    }
+  },
+  methods: {
+    add() {
+      this.$store.dispatch('addBoard', { title: this.search })
+      this.search = null
+    },
+    close() {
+      this.search = null
+      this.opened = false
+    }
+  },
+  watch: {
+    opened() {
+      this.$nextTick(() => this.$el.querySelector('input').focus())
+    },
+    $route() {
+      this.close()
     }
   }
 }
@@ -19,18 +39,38 @@ export default {
 
 <template>
   <div class="board-menu">
-    <button>Boards</button>
-    <div>
-      <input type="text" v-model="search">
+    <button type="button" v-on:click="opened = !opened">Boards</button>
+    <div class="dropdown" v-show="opened">
+      <div>
+        <input type="text" v-model="search">
+      </div>
       <ul v-show="boards.length > 0">
-        <li v-for="board in boards">{{ board.title }}</li>
+        <li v-for="board in boards">
+          <router-link :to="{ name: 'board', params: { boardUuid: board.uuid } }">
+            {{ board.title }}
+          </router-link>
+        </li>
       </ul>
+      <div>
+        <button type="button" v-show="hasSearch" v-on:click="add()">
+          Create a "{{ search }}" board...
+        </button>
+      </div>
     </div>
   </div>
 </template>
 
 <style lang="scss">
   .board-menu {
+    position: relative;
 
+    .dropdown {
+      position: absolute;
+      top: 30px;
+      width: 200px;
+      z-index: 1000;
+      background-color: #222;
+      padding: 10px;
+    }
   }
 </style>
