@@ -27,9 +27,7 @@ export default {
   watch: {
     editing() {
       if (true === this.editing) {
-        setTimeout(() => {
-          this.$el.querySelector('textarea').focus()
-        }, 100)
+        this.$nextTick(() => { this.$el.querySelector('textarea').focus() })
       }
     }
   }

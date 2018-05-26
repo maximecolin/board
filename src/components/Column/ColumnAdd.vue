@@ -25,9 +25,7 @@ export default {
   watch: {
     opened() {
       if (true === this.opened) {
-        setTimeout(() => {
-          this.$el.querySelector('input').focus()
-        }, 100)
+        this.$nextTick(() => { this.$el.querySelector('input').focus() })
       }
     }
   }

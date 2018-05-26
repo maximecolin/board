@@ -26,9 +26,7 @@ export default {
   watch: {
     opened() {
       if (true === this.opened) {
-        setTimeout(() => {
-          this.$el.querySelector('textarea').focus()
-        }, 100)
+        this.$nextTick(() => { this.$el.querySelector('textarea').focus() })
       }
     }
   }

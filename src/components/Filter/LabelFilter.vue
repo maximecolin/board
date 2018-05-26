@@ -27,7 +27,7 @@ export default {
     open() {
       if (this.open) {
         this.search = null
-        setTimeout(() => this.$el.querySelector('input').focus(), 200)
+        this.$nextTick(() => { this.$el.querySelector('input').focus() })
       }
     }
   }
