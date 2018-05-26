@@ -25,6 +25,11 @@ const getters = {
   findCardByUuid: (state, getters) => (boardUuid, cardUuid) => {
     return getters.allBoardCards(boardUuid).find(card => card.uuid === cardUuid)
   },
+  searchBoards: (state, getters) => (search) => {
+    return search === null || search === ''
+      ? state.boards
+      : state.boards.filter(board => board.title.match(new RegExp('.*' + search + '.*', 'i')))
+  },
   searchLabels: (state, getters) => (boardUuid, search) => {
     return search === null || search === ''
       ? getters.findBoardByUuid(boardUuid).labels

@@ -8,9 +8,7 @@ export default {
   },
   computed: {
     boards() {
-      return this.hasSearch
-        ? this.$store.getters.searchBoards(this.search)
-        : this.$store.state.boards
+      return this.$store.getters.searchBoards(this.search)
     },
     hasSearch() {
       return this.search !== null && this.search !== ''
