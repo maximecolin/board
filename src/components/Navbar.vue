@@ -1,9 +1,11 @@
 <script>
 import BoardMenu from './Board/BoardMenu.vue'
+import SearchForm from './Board/SearchForm.vue'
 
 export default {
   components: {
-    BoardMenu
+    BoardMenu,
+    SearchForm
   }
 }
 </script>
@@ -11,6 +13,7 @@ export default {
 <template>
   <div class="navbar">
     <BoardMenu></BoardMenu>
+    <SearchForm :board="$board"></SearchForm>
   </div>
 </template>
 

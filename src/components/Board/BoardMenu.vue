@@ -60,6 +60,7 @@ export default {
 
 <style lang="scss">
   .board-menu {
+    display: inline-block;
     position: relative;
 
     .dropdown {

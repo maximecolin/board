@@ -1,6 +1,5 @@
 <script>
 import Draggable from 'vuedraggable'
-import SearchForm from './SearchForm.vue'
 import FilterForm from '../Filter/FilterForm.vue'
 import Column from '../Column/Column.vue'
 import ColumnAdd from '../Column/ColumnAdd.vue'
@@ -8,7 +7,6 @@ import ColumnAdd from '../Column/ColumnAdd.vue'
 export default {
   components: {
     Draggable,
-    SearchForm,
     FilterForm,
     Column,
     ColumnAdd
@@ -21,15 +19,12 @@ export default {
     }
   },
   computed: {
-    board() {
-      return this.$store.getters.findBoardByUuid(this.$route.params.boardUuid)
-    },
     columns: {
       get() {
-        return this.board.columns
+        return this.$board.columns
       },
       set(columns) {
-        this.$store.dispatch('updateBoardColumns', { boardUuid: this.board.uuid, columns })
+        this.$store.dispatch('updateBoardColumns', { boardUuid: this.$board.uuid, columns })
       }
     }
   }
@@ -38,11 +33,10 @@ export default {
 
 <template>
   <div>
-    <SearchForm :board="board"></SearchForm>
-    <FilterForm :board="board" v-model="filters"></FilterForm>
+    <FilterForm :board="$board" v-model="filters"></FilterForm>
     <Draggable v-model="columns" :options="{ draggable: '.column-draggable', filter: '.column-not-draggable' }" class="columns">
-      <Column v-for="(column, key) in columns" :key="key" :board="board" :column="column" :filters="filters" class="column-draggable"></Column>
-      <ColumnAdd slot="footer" class="column" :board="board"></ColumnAdd>
+      <Column v-for="(column, key) in columns" :key="key" :board="$board" :column="column" :filters="filters" class="column-draggable"></Column>
+      <ColumnAdd slot="footer" class="column" :board="$board"></ColumnAdd>
     </Draggable>
   </div>
 </template>

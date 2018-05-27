@@ -8,6 +8,14 @@ Vue.config.productionTip = false
 
 Vue.use(shortkey)
 
+Vue.mixin({
+  computed: {
+    $board() {
+      return this.$store.getters.findBoardByUuid(this.$route.params.boardUuid)
+    }
+  }
+})
+
 new Vue({
   store,
   router,

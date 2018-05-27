@@ -15,7 +15,7 @@ export default {
   },
   computed: {
     cards() {
-      return this.$store.getters.searchCards(this.board.uuid, this.input)
+      return this.board ? this.$store.getters.searchCards(this.board.uuid, this.input) : []
     }
   },
   methods: {
@@ -39,15 +39,14 @@ export default {
 
 <style lang="scss">
   .search-form {
+    display: inline-block;
     position: relative;
-    display: block;
-    width: calc(100% - 30px);
+    width: 300px;
 
-    margin: 20px 15px;
     padding: 0;
 
     color: #cccccc;
-    font-size: 18px;
+    font-size: 16px;
 
 
     .search-input {
@@ -55,7 +54,7 @@ export default {
       width: 100%;
       box-sizing: border-box;
 
-      padding: 10px;
+      padding: 5px;
       margin: 0;
 
       background-color: #36393c;
@@ -76,7 +75,7 @@ export default {
 
       box-sizing: border-box;
 
-      padding: 15px 20px;
+      padding: 0 10px;
       margin: 10px 0;
 
       background-color: #111;
