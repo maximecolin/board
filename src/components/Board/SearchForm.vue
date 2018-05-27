@@ -10,17 +10,32 @@ export default {
   },
   data() {
     return {
-      input: null
+      input: null,
+      focus: false
     }
   },
   computed: {
     cards() {
       return this.board ? this.$store.getters.searchCards(this.board.uuid, this.input) : []
+    },
+    large() {
+      return this.focus || this.cards.length > 0
     }
   },
   methods: {
-    clear() {
+    onEscape() {
       this.input = null
+      this.$el.querySelector('input').blur()
+    },
+    onFocus() {
+      this.focus = true
+    },
+    onBlur() {
+      this.focus = false
+
+      if (this.cards.length === 0) {
+        this.input = null;
+      }
     }
   }
 }
@@ -28,7 +43,15 @@ export default {
 
 <template>
   <form v-on:submit.prevent class="search-form">
-    <input type="text" v-model="input" class="search-input" placeholder="Search..." v-on:keydown.escape.prevent.stop="clear()">
+    <input
+      type="text"
+      placeholder="Search..."
+      v-model="input"
+      v-bind:class="{ 'search-input': true, 'search-input-large': large }"
+      v-on:keydown.escape.prevent.stop="onEscape()"
+      v-on:focus="onFocus()"
+      v-on:blur="onBlur()"
+    >
     <ul v-show="cards.length > 0" class="search-results">
       <li v-for="card in cards">
         <Card :board="board" :card="card"></Card>
@@ -41,7 +64,6 @@ export default {
   .search-form {
     display: inline-block;
     position: relative;
-    width: 300px;
 
     padding: 0;
 
@@ -54,7 +76,7 @@ export default {
       width: 100%;
       box-sizing: border-box;
 
-      padding: 5px;
+      padding: 5px 7px;
       margin: 0;
 
       background-color: #36393c;
@@ -62,6 +84,14 @@ export default {
 
       color: #cccccc;
       font-size: 18px;
+
+      width: 180px;
+
+      transition: width 0.3s ease;
+
+      &.search-input-large {
+        width: 300px;
+      }
     }
 
     .search-results {
