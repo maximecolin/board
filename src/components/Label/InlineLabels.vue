@@ -8,7 +8,7 @@ export default {
 
 <template>
   <span class="inline-labels">
-    <span v-for="(label, index) in labels" :key="index" class="inline-label">{{ label.name }}</span>
+    <span v-for="(label, key) in labels" :key="key" class="inline-label">{{ label.name }}</span>
   </span>
 </template>
 

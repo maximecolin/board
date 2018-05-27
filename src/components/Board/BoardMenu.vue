@@ -43,7 +43,7 @@ export default {
         <input type="text" v-model="search">
       </div>
       <ul v-show="boards.length > 0">
-        <li v-for="board in boards">
+        <li v-for="(board, key) in boards" :key="key">
           <router-link :to="{ name: 'board', params: { boardUuid: board.uuid } }">
             {{ board.title }}
           </router-link>

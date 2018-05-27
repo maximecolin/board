@@ -41,7 +41,7 @@ export default {
     </button>
     <div class="label-filter-dropdown" v-show="open">
       <input type="text" v-model="search">
-      <label v-for="label in labels">
+      <label v-for="(label, key) in labels" :key="key">
         <input type="checkbox" name="labels" v-bind:value="label.uuid" v-model="checked">
         <span>{{ label.name }}</span>
       </label>

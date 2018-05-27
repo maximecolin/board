@@ -53,7 +53,7 @@ export default {
       v-on:blur="onBlur()"
     >
     <ul v-show="cards.length > 0" class="search-results">
-      <li v-for="card in cards">
+      <li v-for="(card, key) in cards" :key="key">
         <Card :board="board" :card="card"></Card>
       </li>
     </ul>

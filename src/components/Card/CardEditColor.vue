@@ -20,7 +20,7 @@ export default {
 
 <template>
   <form class="card-edit-color">
-    <label v-for="value in colors">
+    <label v-for="(value, key) in colors" :key="key">
       <input type="radio" name="color" v-model="color" v-bind:value="value">
       <span v-bind:class="value"></span>
     </label>
