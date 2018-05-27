@@ -40,7 +40,7 @@ export default {
     <button type="button" v-on:click="opened = !opened">Boards</button>
     <div class="dropdown" v-show="opened">
       <div>
-        <input type="text" v-model="search">
+        <input type="text" v-model="search" v-on:keydown.escape.prevent.stop="close()">
       </div>
       <ul v-show="boards.length > 0">
         <li>
