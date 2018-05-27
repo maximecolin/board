@@ -1,11 +1,13 @@
 <script>
 import CardEditTitle from './CardEditTitle.vue'
+import CardEditDescription from './CardEditDescription.vue'
 import CardEditColor from './CardEditColor.vue'
 import CardEditLabel from './CardEditLabel.vue'
 
 export default {
   components: {
     CardEditTitle,
+    CardEditDescription,
     CardEditColor,
     CardEditLabel
   },
@@ -30,6 +32,7 @@ export default {
     <div class="modal" v-on:click.stop>
       <button v-shortkey.once="['esc']" v-on:shortkey="close()" v-on:click="close()" class="close">&times;</button>
       <CardEditTitle :board="board" :card="card"></CardEditTitle>
+      <CardEditDescription :board="board" :card="card"></CardEditDescription>
       <CardEditColor :board="board" :card="card"></CardEditColor>
       <CardEditLabel :board="board" :card="card"></CardEditLabel>
     </div>
