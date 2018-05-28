@@ -54,15 +54,17 @@ export default {
 <style lang="scss">
   .card-edit-title {
     .show {
-      font-size: 14px;
+      font-size: 32px;
     }
 
     .edit {
       textarea {
-        font-size: 14px;
+        font-size: 32px;
         display: block;
         resize: none;
         width: 100%;
+        height: 42px;
+        padding: 0;
       }
     }
   }

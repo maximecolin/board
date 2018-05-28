@@ -3,13 +3,15 @@ import CardEditTitle from './CardEditTitle.vue'
 import CardEditDescription from './CardEditDescription.vue'
 import CardEditColor from './CardEditColor.vue'
 import CardEditLabel from './CardEditLabel.vue'
+import CardDisplayLabel from './CardDisplayLabel.vue'
 
 export default {
   components: {
     CardEditTitle,
     CardEditDescription,
     CardEditColor,
-    CardEditLabel
+    CardEditLabel,
+    CardDisplayLabel
   },
   computed: {
     board() {
@@ -17,6 +19,11 @@ export default {
     },
     card() {
       return this.$store.getters.findCardByUuid(this.$route.params.boardUuid, this.$route.params.cardUuid)
+    },
+    labels() {
+      return this.card.labels
+        .map(labelUuid => this.$store.getters.findLabelByUuid(this.board.uuid, labelUuid))
+        .filter(label => label !== undefined)
     }
   },
   methods: {
@@ -31,10 +38,17 @@ export default {
   <div class="overlay" v-on:click="close()">
     <div class="modal" v-on:click.stop>
       <button v-shortkey.once="['esc']" v-on:shortkey="close()" v-on:click="close()" class="close">&times;</button>
-      <CardEditTitle :board="board" :card="card"></CardEditTitle>
-      <CardEditDescription :board="board" :card="card"></CardEditDescription>
-      <CardEditColor :board="board" :card="card"></CardEditColor>
-      <CardEditLabel :board="board" :card="card"></CardEditLabel>
+      <div class="row">
+        <div class="col-left">
+          <CardEditTitle :board="board" :card="card"></CardEditTitle>
+          <CardDisplayLabel :labels="labels" v-show="labels.length > 0"></CardDisplayLabel>
+          <CardEditDescription :board="board" :card="card"></CardEditDescription>
+        </div>
+        <div class="col-right">
+          <CardEditColor :board="board" :card="card"></CardEditColor>
+          <CardEditLabel :board="board" :card="card"></CardEditLabel>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -50,12 +64,26 @@ export default {
     z-index: 1100;
 
     .modal {
-      width: 50vw;
+      width: 70vw;
       margin: 50px auto;
-      padding: 30px;
       background-color: #36393c;
       position: relative;
       border-radius: 3px;
+
+      .row {
+        display: flex;
+        flex-direction: row;
+
+        .col-left {
+          width: 70%;
+          padding: 30px;
+        }
+
+        .col-right {
+          width: 30%;
+          padding: 30px;
+        }
+      }
     }
 
     .close {

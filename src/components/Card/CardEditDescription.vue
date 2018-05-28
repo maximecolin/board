@@ -62,7 +62,11 @@ export default {
 
 <style lang="scss">
   .card-edit-description {
+    margin: 10px 0;
+    font-size: 16px;
+
     textarea {
+      font-size: 16px;
       display: block;
       width: 100%;
       resize: none;

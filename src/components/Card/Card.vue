@@ -12,7 +12,9 @@ export default {
   },
   computed: {
     labels() {
-      return this.card.labels.map(labelUuid => this.$store.getters.findLabelByUuid(this.board.uuid, labelUuid));
+      return this.card.labels
+        .map(labelUuid => this.$store.getters.findLabelByUuid(this.board.uuid, labelUuid))
+        .filter(label => label !== undefined)
     },
     className() {
       return 'color-' + this.card.color;
