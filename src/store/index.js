@@ -122,9 +122,6 @@ const actions = {
   },
   updateCardLabels({ getters, commit }, { boardUuid, cardUuid, labels }) {
     commit('updateCardLabels', { card: getters.findCardByUuid(boardUuid, cardUuid), labels })
-  },
-  updateLabel({ getters, commit }, { boardUuid, cardUuid, name }) {
-    commit('updateLabel', { label: getters.findCardByUuid(boardUuid, cardUuid), name })
   }
 }
 
