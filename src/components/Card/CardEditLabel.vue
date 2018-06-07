@@ -48,6 +48,8 @@ export default {
       width: 100%;
       font-size: 16px;
       cursor: pointer;
+      text-align: left;
+      padding: 5px;
     }
 
     .card-edit-label-dropdown {

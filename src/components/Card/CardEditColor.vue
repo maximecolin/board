@@ -33,9 +33,6 @@ export default {
 
     </div>
   </div>
-
-
-
 </template>
 
 <style lang="scss">
@@ -51,6 +48,8 @@ export default {
       width: 100%;
       font-size: 16px;
       cursor: pointer;
+      text-align: left;
+      padding: 5px;
     }
 
     .card-edit-color-dropdown {

@@ -98,7 +98,7 @@ const actions = {
   },
   addColumnCard({ getters, commit }, { boardUuid, columnUuid, title }) {
     const column = getters.findColumnByUuid(boardUuid, columnUuid)
-    const card = { uuid: uuid(), title, description: null, color: 'none', labels: [] }
+    const card = { uuid: uuid(), title, description: null, color: 'none', labels: [], estimated: 0, points: 0 }
     const cards = column.cards.concat([card])
     commit('updateColumnCards', { column, cards })
   },
@@ -119,6 +119,9 @@ const actions = {
   },
   updateCardColor({ getters, commit }, { boardUuid, cardUuid, color }) {
     commit('updateCardColor', { card: getters.findCardByUuid(boardUuid, cardUuid), color })
+  },
+  updateCardPoints({ getters, commit }, { boardUuid, cardUuid, points }) {
+    commit('updateCardPoints', { card: getters.findCardByUuid(boardUuid, cardUuid), points })
   },
   updateCardLabels({ getters, commit }, { boardUuid, cardUuid, labels }) {
     commit('updateCardLabels', { card: getters.findCardByUuid(boardUuid, cardUuid), labels })
@@ -158,6 +161,9 @@ const mutations = {
   },
   updateCardColor(state, { card, color }) {
     card.color = color
+  },
+  updateCardPoints(state, { card, points }) {
+    card.points = points
   },
   updateCardLabels(state, { card, labels }) {
     card.labels = labels

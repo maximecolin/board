@@ -3,6 +3,7 @@ import CardEditTitle from './CardEditTitle.vue'
 import CardEditDescription from './CardEditDescription.vue'
 import CardEditColor from './CardEditColor.vue'
 import CardEditLabel from './CardEditLabel.vue'
+import CardEditPoints from './CardEditPoints.vue'
 import CardDisplayLabel from './CardDisplayLabel.vue'
 
 export default {
@@ -11,6 +12,7 @@ export default {
     CardEditDescription,
     CardEditColor,
     CardEditLabel,
+    CardEditPoints,
     CardDisplayLabel
   },
   computed: {
@@ -47,6 +49,7 @@ export default {
         <div class="col-right">
           <CardEditColor :board="board" :card="card"></CardEditColor>
           <CardEditLabel :board="board" :card="card"></CardEditLabel>
+          <CardEditPoints :board="board" :card="card"></CardEditPoints>
         </div>
       </div>
     </div>
