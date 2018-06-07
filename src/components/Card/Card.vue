@@ -1,9 +1,11 @@
 <script>
 import InlineLabels from '../Label/InlineLabels.vue'
+import CardDisplayPoint from './CardDisplayPoint.vue'
 
 export default {
   components: {
-    InlineLabels
+    InlineLabels,
+    CardDisplayPoint
   },
   props: {
     board: Object,
@@ -35,6 +37,7 @@ export default {
 
 <template>
   <router-link :to="{ name: 'card', params: { boardUuid: board.uuid, cardUuid: card.uuid } }" v-bind:class="[className, 'card', filtered ? 'filtered' : '']">
+    <CardDisplayPoint :points="card.points"></CardDisplayPoint>
     <InlineLabels :labels="labels"></InlineLabels>
     <span class="card-title">{{ card.title }}</span>
   </router-link>
@@ -84,6 +87,10 @@ export default {
       margin: 0;
       padding: 0;
       height: 14px;
+    }
+
+    .card-display-points {
+      float: right;
     }
 
   }

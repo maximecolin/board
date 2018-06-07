@@ -1,5 +1,10 @@
 <script>
+import CardDisplayPoint from './CardDisplayPoint.vue'
+
 export default {
+  components: {
+    CardDisplayPoint
+  },
   props: {
     board: Object,
     card: Object
@@ -8,11 +13,6 @@ export default {
     return {
       editing: false,
       input: this.card.points
-    }
-  },
-  computed: {
-    points() {
-      return this.card.points !== null ? this.card.points : '-'
     }
   },
   methods: {
@@ -45,7 +45,7 @@ export default {
   <div class="card-edit-points">
     <button class="card-edit-points-button" v-show="!editing" v-on:click="edit()">
       Points
-      <span class="badge">{{ points }}</span>
+      <CardDisplayPoint :points="card.points"></CardDisplayPoint>
     </button>
     <form class="card-edit-points-form" v-show="editing" v-on:submit.prevent="save()">
       <input type="number" v-model="input" v-shortkey.avoid v-on:keyup.escape.prevent.stop="cancel()">
@@ -86,13 +86,8 @@ export default {
       }
     }
 
-    .badge {
-      background-color: #ccc;
-      color: #222;
-      font-weight: bold;
-      padding: 1px 5px;
-      display: inline-block;
-      border-radius: 50px;
+    .card-display-points {
+      float: right;
     }
   }
 </style>
