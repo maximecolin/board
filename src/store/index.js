@@ -98,7 +98,7 @@ const actions = {
   },
   addColumnCard({ getters, commit }, { boardUuid, columnUuid, title }) {
     const column = getters.findColumnByUuid(boardUuid, columnUuid)
-    const card = { uuid: uuid(), title, description: null, color: 'none', labels: [], estimated: 0, points: 0 }
+    const card = { uuid: uuid(), title, description: null, color: 'none', labels: [], estimated: null, points: null }
     const cards = column.cards.concat([card])
     commit('updateColumnCards', { column, cards })
   },

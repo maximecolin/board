@@ -2,12 +2,14 @@
 import Draggable from 'vuedraggable'
 import Card from '../Card/Card.vue'
 import CardAdd from '../Card/CardAdd.vue'
+import CardDisplayPoint from '../Card/CardDisplayPoint.vue'
 
 export default {
   components: {
     Draggable,
     Card,
-    CardAdd
+    CardAdd,
+    CardDisplayPoint
   },
   props: {
     board: Object,
@@ -22,6 +24,9 @@ export default {
       set(cards) {
         this.$store.dispatch('updateColumnCards', { boardUuid: this.board.uuid, columnUuid: this.column.uuid, cards })
       }
+    },
+    points() {
+      return this.cards.filter(card => Number.isInteger(card.points)).reduce((sum, card) => sum + card.points, 0)
     }
   },
   methods: {
@@ -35,6 +40,7 @@ export default {
 <template>
   <div class="column">
     <h4 class="title">
+      <CardDisplayPoint :points="points"></CardDisplayPoint>
       {{ column.title }}
       <button type="button" class="column-not-draggable" v-on:click="remove()">&times;</button>
     </h4>
@@ -60,6 +66,10 @@ export default {
 
     .title {
       text-transform: uppercase;
+
+      .card-display-points {
+        float: right;
+      }
     }
 
     .cards {
