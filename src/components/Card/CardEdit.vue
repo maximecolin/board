@@ -4,7 +4,9 @@ import CardEditDescription from './CardEditDescription.vue'
 import CardEditColor from './CardEditColor.vue'
 import CardEditLabel from './CardEditLabel.vue'
 import CardEditPoints from './CardEditPoints.vue'
+import CardEditTasks from './CardEditTasks.vue'
 import CardDisplayLabel from './CardDisplayLabel.vue'
+import CardProgress from './CardProgress.vue'
 
 export default {
   components: {
@@ -13,7 +15,9 @@ export default {
     CardEditColor,
     CardEditLabel,
     CardEditPoints,
-    CardDisplayLabel
+    CardEditTasks,
+    CardDisplayLabel,
+    CardProgress
   },
   computed: {
     board() {
@@ -45,6 +49,8 @@ export default {
           <CardEditTitle :board="board" :card="card"></CardEditTitle>
           <CardDisplayLabel :labels="labels" v-show="labels.length > 0"></CardDisplayLabel>
           <CardEditDescription :board="board" :card="card"></CardEditDescription>
+          <CardProgress :card="card"></CardProgress>
+          <CardEditTasks :board="board" :card="card"></CardEditTasks>
         </div>
         <div class="col-right">
           <CardEditColor :board="board" :card="card"></CardEditColor>

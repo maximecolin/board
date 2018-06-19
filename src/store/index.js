@@ -25,6 +25,9 @@ const getters = {
   findCardByUuid: (state, getters) => (boardUuid, cardUuid) => {
     return getters.allBoardCards(boardUuid).find(card => card.uuid === cardUuid)
   },
+  findTaskByUuid: (state, getters) => (boardUuid, cardUuid, taskUuid) => {
+    return getters.findCardByUuid(boardUuid, cardUuid).tasks.find(task => task.uuid === taskUuid)
+  },
   searchBoards: (state) => (search) => {
     return search === null || search === ''
       ? state.boards
@@ -97,8 +100,18 @@ const actions = {
     commit('updateColumnCards', { column, cards })
   },
   addColumnCard({ getters, commit }, { boardUuid, columnUuid, title }) {
+    const card = {
+      uuid: uuid(),
+      title,
+      description: null,
+      color: 'none',
+      labels: [],
+      estimated: null,
+      points: null,
+      tasks: []
+    }
+
     const column = getters.findColumnByUuid(boardUuid, columnUuid)
-    const card = { uuid: uuid(), title, description: null, color: 'none', labels: [], estimated: null, points: null }
     const cards = column.cards.concat([card])
     commit('updateColumnCards', { column, cards })
   },
@@ -125,6 +138,23 @@ const actions = {
   },
   updateCardLabels({ getters, commit }, { boardUuid, cardUuid, labels }) {
     commit('updateCardLabels', { card: getters.findCardByUuid(boardUuid, cardUuid), labels })
+  },
+
+  // Card tasks
+  addCardTask({ getters, commit }, { boardUuid, cardUuid, label }) {
+    const task = {
+      uuid: uuid(),
+      label,
+      done: false
+    }
+
+    const card = getters.findCardByUuid(boardUuid, cardUuid)
+    const tasks = card.tasks.concat([task])
+    commit('updateCardTasks', { card, tasks })
+  },
+  updateCardTaskDone({ getters, commit }, { boardUuid, cardUuid, taskUuid, value }) {
+    const task = getters.findTaskByUuid(boardUuid, cardUuid, taskUuid)
+    commit('updateCardTaskDone', { task, value })
   }
 }
 
@@ -167,6 +197,12 @@ const mutations = {
   },
   updateCardLabels(state, { card, labels }) {
     card.labels = labels
+  },
+  updateCardTasks(state, { card, tasks }) {
+    card.tasks = tasks
+  },
+  updateCardTaskDone(state, { task, value }) {
+    task.done = value
   }
 }
 

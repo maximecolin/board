@@ -1,11 +1,13 @@
 <script>
 import InlineLabels from '../Label/InlineLabels.vue'
 import CardDisplayPoint from './CardDisplayPoint.vue'
+import CardProgress from './CardProgress.vue'
 
 export default {
   components: {
     InlineLabels,
-    CardDisplayPoint
+    CardDisplayPoint,
+    CardProgress
   },
   props: {
     board: Object,
@@ -40,6 +42,7 @@ export default {
     <CardDisplayPoint :points="card.points"></CardDisplayPoint>
     <InlineLabels :labels="labels"></InlineLabels>
     <span class="card-title">{{ card.title }}</span>
+    <CardProgress :card="card" v-show="card.tasks.length > 0"></CardProgress>
   </router-link>
 </template>
 
