@@ -26,3 +26,11 @@ export default {
     </label>
   </form>
 </template>
+
+<style lang="scss">
+  .card-edit-task {
+    input:checked ~ span {
+      text-decoration: line-through;
+    }
+  }
+</style>
