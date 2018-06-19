@@ -1,24 +1,19 @@
 <script>
 import CardEditTask from './CardEditTask.vue'
+import InputForm from '../Common/InputForm.vue'
 
 export default {
   components: {
-    CardEditTask
+    CardEditTask,
+    InputForm
   },
   props: {
     board: Object,
     card: Object
   },
-  data() {
-    return {
-      input: null
-    }
-  },
-  computed: {
-  },
   methods: {
-    add() {
-      this.$store.dispatch('addCardTask', { boardUuid: this.board.uuid, cardUuid: this.card.uuid, label: this.input })
+    add(label) {
+      this.$store.dispatch('addCardTask', { boardUuid: this.board.uuid, cardUuid: this.card.uuid, label })
       this.input = null
     }
   }
@@ -29,9 +24,7 @@ export default {
   <div>
     <h4>Tasks</h4>
     <CardEditTask v-for="(task, key) in card.tasks" :key="key" :board="board" :card="card" :task="task"></CardEditTask>
-    <form v-on:submit.prevent.stop="add()">
-      <input type="text" v-model="input">
-    </form>
+    <InputForm :placeholder="'Add task'" :label="'Add'" v-on:submit="add($event.value)"></InputForm>
   </div>
 </template>
 
